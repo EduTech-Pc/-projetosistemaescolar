@@ -1,0 +1,258 @@
+/*
+ * ============================================================
+ *  style.css  -  O VISUAL DO SISTEMA
+ * ============================================================
+ *  CSS define COMO a página parece. Estrutura de uma regra:
+ *      seletor { propriedade: valor; }
+ *  (.nome = elementos com class="nome"; h1 = todas as tags h1)
+ */
+
+/* ---------- VARIÁVEIS: troque as cores do site inteiro aqui ---------- */
+:root {
+  --fundo: #F2F4FA;     /* fundo da página */
+  --papel: #FFFFFF;     /* fundo dos cartões */
+  --tinta: #131B33;     /* texto principal e topo */
+  --suave: #667089;     /* texto secundário */
+  --linha: #E1E5F0;     /* bordas finas */
+  --destaque: #3B4BDB;  /* azul dos botões */
+  --alerta: #FFB703;    /* amarelo: etiquetas e responsável */
+  --erro: #C23B52;      /* vermelho: erros e remover */
+}
+
+* { box-sizing: border-box; }   /* a largura passa a incluir borda e espaço interno */
+
+/* O atributo "hidden" do HTML precisa vencer qualquer "display" definido abaixo. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+/* ---------- TOPO ---------- */
+.topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;                 /* no celular, os itens quebram de linha */
+  gap: 20px;
+  padding: 44px clamp(16px, 5vw, 56px) 80px;   /* o espaço extra embaixo faz o conteúdo "subir" sobre o topo */
+  background: var(--tinta);
+  color: #fff;
+}
+.topo h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.4rem);   /* cresce com a tela, dentro de limites */
+  font-weight: 800;
+  letter-spacing: -.03em;
+  line-height: 1.05;
+}
+.topo p { margin: 8px 0 0; color: #AEB7D0; max-width: 34ch; }
+.resumo { display: flex; gap: 12px; }
+.resumo span {
+  display: grid;
+  padding: 12px 20px;
+  border: 1px solid #ffffff2e;
+  border-radius: 14px;
+  color: #AEB7D0;
+  font-size: .85rem;
+}
+.resumo strong { font-size: 2rem; line-height: 1.1; color: var(--alerta); }   /* números grandes em amarelo */
+
+/* Botão-link do topo (leva para a outra página) */
+.btn-topo {
+  align-self: center;
+  text-decoration: none;
+  background: var(--alerta); color: #4A3500;
+  font-weight: 700; padding: 12px 20px; border-radius: 12px;
+}
+.btn-topo:hover { filter: brightness(.95); }
+
+/* ---------- ESTRUTURA ---------- */
+.conteudo {
+  max-width: 1240px;
+  margin: -48px auto 0;            /* margem negativa: sobe sobre o topo escuro */
+  padding: 0 clamp(16px, 5vw, 56px) 56px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;   /* coluna fixa de 380px + o resto (1fr) */
+  gap: 28px;
+  align-items: start;
+}
+.forms { display: grid; gap: 22px; }
+
+/* ---------- AVISO DE ERRO ---------- */
+.alerta {
+  background: #FFF1F3;
+  border: 1px solid #F3B8C2;
+  border-left: 6px solid var(--erro);
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 22px;
+  color: #7A1F30;
+}
+.alerta ul { margin: 6px 0 0; padding-left: 20px; }
+
+/* ---------- FORMULÁRIOS ---------- */
+.painel {
+  background: var(--papel);
+  border-radius: 20px;
+  padding: 26px;
+  display: grid;
+  gap: 16px;
+  box-shadow: 0 10px 30px -12px #131B3330;   /* sombra suave */
+}
+.painel h2 { margin: 0; font-size: 1.35rem; font-weight: 800; letter-spacing: -.01em; }
+
+label { display: grid; gap: 6px; font-size: .85rem; font-weight: 600; color: var(--suave); }
+.dica { font-weight: 400; color: var(--suave); }
+
+input, select {
+  font: inherit;                    /* usa a mesma fonte da página */
+  color: var(--tinta);
+  padding: 11px 13px;
+  border: 1.5px solid var(--linha);
+  border-radius: 10px;
+  background: #FAFBFE;
+  width: 100%;
+  transition: border-color .15s;
+}
+input[type=color] { padding: 3px; height: 44px; }
+/* :focus = campo selecionado. O contorno ajuda quem navega pelo teclado. */
+input:focus, select:focus, button:focus-visible, summary:focus-visible {
+  outline: 3px solid #3B4BDB40;
+  border-color: var(--destaque);
+}
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* Bloco do responsável: borda tracejada amarela para chamar atenção */
+.responsavel {
+  display: grid; gap: 14px;
+  margin: 0;
+  padding: 18px;
+  border: 2px dashed var(--alerta);
+  border-radius: 14px;
+  background: #FFFBEA;
+}
+.responsavel legend { padding: 0 8px; font-weight: 800; color: #8A6100; }
+
+/* Dias da semana no formulário: botões "ligar/desligar" */
+.dias-campo { display: flex; flex-wrap: wrap; gap: 8px; border: 0; padding: 0; margin: 0; }
+.dias-campo legend { font-size: .85rem; font-weight: 600; color: var(--suave); padding: 0 0 6px; }
+.chip { display: block; position: relative; cursor: pointer; }
+.chip input { position: absolute; opacity: 0; width: auto; }   /* esconde a caixinha de verdade */
+.chip span {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;                /* formato de pílula */
+  border: 1.5px solid var(--linha);
+  background: #FAFBFE;
+  color: var(--tinta);
+  font-weight: 600;
+}
+.chip input:checked + span { background: var(--destaque); border-color: var(--destaque); color: #fff; }   /* marcado */
+.chip input:focus-visible + span { outline: 3px solid #3B4BDB40; }
+
+/* ---------- BOTÕES ---------- */
+button {
+  font: inherit; font-weight: 700;
+  cursor: pointer;
+  border: 0; border-radius: 12px;
+  padding: 13px 18px;
+  background: var(--destaque);
+  color: #fff;
+}
+button:hover { background: #2D3CB8; }
+button.link { background: none; color: var(--suave); padding: 4px 8px; font-size: .85rem; font-weight: 400; }
+button.link:hover { background: none; color: var(--erro); text-decoration: underline; }
+
+/* ---------- CARTÕES DE TURMA ---------- */
+.turmas { display: grid; gap: 24px; align-content: start; }
+.turma {
+  background: var(--papel);
+  border-radius: 20px;
+  border-top: 8px solid var(--cor);     /* var(--cor) vem do HTML: cada turma tem a sua */
+  padding: 24px 26px 18px;
+  box-shadow: 0 10px 30px -12px #131B3330;
+}
+.turma-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.turma h2 { margin: 0; font-size: 1.7rem; font-weight: 800; letter-spacing: -.02em; color: var(--cor); }
+.turma-topo p { margin: 2px 0 0; color: var(--suave); font-size: .9rem; }
+
+/* Faixa com os 7 dias da semana */
+.semana { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin: 18px 0 8px; }
+.semana span {
+  text-align: center;
+  padding: 7px 0;
+  border-radius: 10px;
+  font-size: .8rem; font-weight: 600;
+  background: #F2F4FA;
+  color: #A3AAC0;                       /* dia sem aula: apagado */
+}
+.semana span.on { background: var(--cor); color: #fff; }   /* dia de aula: pintado com a cor da turma */
+
+/* ---------- ALUNOS ---------- */
+.aluno { border-top: 1px solid var(--linha); }
+.aluno:first-child { border-top: 0; }
+.aluno summary {                         /* a linha clicável do aluno */
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 0;
+  cursor: pointer;
+  list-style: none;                      /* tira a setinha padrão do navegador */
+}
+.aluno summary::-webkit-details-marker { display: none; }
+/* Setinha própria, que gira quando o aluno está aberto */
+.aluno summary::after {
+  content: '';
+  width: 8px; height: 8px;
+  border-right: 2px solid var(--suave); border-bottom: 2px solid var(--suave);
+  transform: rotate(45deg);
+  margin-left: auto;
+  transition: transform .2s;
+}
+.aluno[open] summary::after { transform: rotate(225deg); }
+
+.avatar {
+  width: 44px; height: 44px; flex: none;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  font-weight: 800; font-size: 1.1rem;
+  background: color-mix(in srgb, var(--cor) 16%, white);   /* versão clarinha da cor da turma */
+  color: var(--cor);
+}
+.info { display: grid; min-width: 0; }
+.info small { color: var(--suave); }
+.etiqueta {                              /* "Menor de idade" */
+  background: var(--alerta); color: #4A3500;
+  font-size: .72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* Detalhes que aparecem ao abrir o aluno */
+.dados { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px 20px; margin: 0 0 14px; }
+.dados div { display: grid; }
+.dados dt { font-size: .75rem; color: var(--suave); }
+.dados dd { margin: 0; font-weight: 600; }
+.resp-dados { background: #FFFBEA; border-radius: 12px; padding: 14px 16px; margin-bottom: 12px; }
+.resp-dados h3 { margin: 0 0 10px; font-size: .95rem; color: #8A6100; }
+.resp-dados .dados { margin: 0; }
+.aluno > form { margin-bottom: 12px; }
+
+.vazio { color: var(--suave); margin: 14px 0 6px; }
+
+/* ---------- CELULAR (telas de até 900px) ---------- */
+@media (max-width: 900px) {
+  .layout { grid-template-columns: 1fr; }   /* uma coluna só */
+  .duas { grid-template-columns: 1fr; }     /* campos empilhados */
+  .topo { padding-bottom: 72px; }
+}
+
+/* Respeita quem desativou animações no sistema */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

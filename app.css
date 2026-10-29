@@ -1,0 +1,68 @@
+/* app.css - estilos do login, início, usuários e área da turma (vem depois do style.css) */
+
+.sucesso { background:#E9F9F1; border:1px solid #A9E3C5; border-left:6px solid #0E9F6E; color:#0B6B49;
+  border-radius:14px; padding:14px 20px; margin-bottom:22px; font-weight:600; }
+
+/* Botões do topo (Início / Sair) */
+.acoes { display:flex; gap:10px; flex-wrap:wrap; align-items:center; }
+.btn-topo.sair { background:transparent; color:#fff; border:1px solid #ffffff59; }
+.btn-topo.sair:hover { background:#ffffff1a; }
+
+/* ---------- LOGIN ---------- */
+body.login { min-height:100vh; display:grid; place-items:center; padding:20px; background:var(--tinta); }
+.login-card { width:min(420px,100%); }
+.login-card h1 { margin:0; font-size:2rem; font-weight:800; letter-spacing:-.03em; }
+.login-card .alerta { margin:0; padding:12px 16px; }
+
+/* ---------- INÍCIO ---------- */
+.atalhos { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-bottom:12px; }
+.atalho { text-decoration:none; color:var(--tinta); gap:2px; transition:transform .15s; }
+.atalho:hover { transform:translateY(-3px); }
+.atalho span { color:var(--suave); font-size:.9rem; }
+.titulo-secao { margin:28px 0 14px; font-size:1.4rem; font-weight:800; letter-spacing:-.01em; }
+.grade-turmas { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+.turma-card { text-decoration:none; color:var(--tinta); border-top:8px solid var(--cor); gap:4px; transition:transform .15s; }
+.turma-card:hover { transform:translateY(-3px); }
+.turma-card h3 { margin:0; font-size:1.4rem; color:var(--cor); }
+.turma-card p { margin:0; color:var(--suave); }
+.semana { display:grid; grid-template-columns:repeat(7,1fr); gap:6px; margin-top:10px; }
+.semana span { text-align:center; padding:6px 0; border-radius:10px; font-size:.78rem; font-weight:600; background:#F2F4FA; color:#A3AAC0; }
+.semana span.on { background:var(--cor); color:#fff; }
+
+/* ---------- USUÁRIOS ---------- */
+.vinculo { border:2px dashed var(--linha); border-radius:12px; padding:12px 14px; margin:0; display:grid; gap:6px; max-height:230px; overflow:auto; }
+.vinculo legend { font-weight:700; font-size:.85rem; color:var(--suave); padding:0 6px; }
+.check { display:flex; gap:8px; align-items:center; font-weight:400; color:var(--tinta); }
+.check input { width:auto; }
+.usuario { display:flex; align-items:center; gap:12px; flex-wrap:wrap; padding:12px 0; border-top:1px solid var(--linha); }
+.usuario:first-child { border-top:0; }
+.usuario .info { flex:1; min-width:180px; display:grid; }
+.usuario .info small { color:var(--suave); }
+.usuario .mini { display:flex; gap:6px; align-items:center; }
+.usuario .mini input { width:140px; padding:7px 10px; }
+.papel-dev { background:#131B33; color:#fff; }
+.papel-adm { background:#3B4BDB; color:#fff; }
+.papel-professor { background:#0E9F8E; color:#fff; }
+.papel-aluno, .papel-responsavel { background:#E1E5F0; color:#131B33; }
+
+/* ---------- ÁREA DA TURMA ---------- */
+.semana-painel { grid-template-columns:auto 1fr; align-items:center; margin-bottom:22px; gap:20px; }
+.semana-painel .semana { margin:0; }
+.nova-pub { margin-bottom:8px; }
+textarea { font:inherit; padding:11px 13px; border:1.5px solid var(--linha); border-radius:10px; background:#FAFBFE; width:100%; resize:vertical; }
+.duas-colunas { display:grid; grid-template-columns:1fr 1fr; gap:24px; align-items:start; }
+.pub { gap:10px; border-left:6px solid var(--cor); }
+.pub h3 { margin:0; font-size:1.15rem; }
+.pub p { margin:0; }
+.video { aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#000; }
+.video iframe { width:100%; height:100%; border:0; }
+.abrir { display:inline-block; text-decoration:none; font-weight:700; color:var(--cor, var(--destaque)); }
+.abrir:hover { text-decoration:underline; }
+.etiqueta.vencida { background:#F8D7DD; color:#7A1F30; }
+.excluir { text-align:right; }
+.vazio { color:var(--suave); }
+
+@media (max-width:900px) {
+  .duas-colunas { grid-template-columns:1fr; }
+  .semana-painel { grid-template-columns:1fr; }
+}
